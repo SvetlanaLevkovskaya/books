@@ -6,11 +6,14 @@
   "scripts": {
     "start": "webpack serve --env port=3000 --env production --progress",
     "build:prod": "webpack --env mode=production",
-    "build:dev": "webpack --env mode=development"
+    "build:dev": "webpack --env mode=development",
+    "predeploy": "npm run build:dev",
+    "deploy": "gh-pages -d build"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "homepage": "https://svetlanalevkovskaya.github.io/books",
   "devDependencies": {
     "@fortawesome/free-solid-svg-icons": "^6.4.2",
     "@fortawesome/react-fontawesome": "^0.2.0",
@@ -22,6 +25,7 @@
     "css-loader": "^6.8.1",
     "dotenv-webpack": "^8.0.1",
     "file-loader": "^6.2.0",
+    "gh-pages": "^6.0.0",
     "html-webpack-plugin": "^5.5.3",
     "mini-css-extract-plugin": "^2.7.6",
     "sass": "^1.66.1",
