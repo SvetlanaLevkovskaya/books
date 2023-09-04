@@ -3,7 +3,6 @@ import { MainPage } from 'pages/main-page';
 import { NotFoundPage } from 'pages/not-found-page';
 
 
-
 export enum AppRoutes {
 	MAIN = 'main',
 	NOT_FOUND = 'not-found',

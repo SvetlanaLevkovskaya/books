@@ -1,1 +1,1 @@
-export * from './ui/route-config'
+export * from './route-config/route-config'

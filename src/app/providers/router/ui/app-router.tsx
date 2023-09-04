@@ -3,7 +3,6 @@ import { Route, Routes } from 'react-router-dom';
 import { Loader } from 'shared/ui/loader';
 import { routeConfig } from 'shared/route-config';
 
-
 export const AppRouter = () => {
 	return (
 		<Suspense fallback={ <Loader /> }>
