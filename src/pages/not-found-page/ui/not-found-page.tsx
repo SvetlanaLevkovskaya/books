@@ -1,6 +1,6 @@
 import pageNotFound from 'assets/not-found.png'
 
-const NotFoundPage = () => {
+export const NotFoundPage = () => {
   return (
     <div className="page-not-found">
       <img
@@ -14,5 +14,3 @@ const NotFoundPage = () => {
 
   )
 }
-
-export default NotFoundPage
