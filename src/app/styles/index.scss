@@ -1,0 +1,27 @@
+@import "reset";
+@import "variables/global";
+
+body {
+  font-family: $font-main;
+  background-color:  $light-grey;
+  color: $dark;
+  font-size: 16px;
+  line-height: 20px
+}
+
+.page-wrapper {
+  flex-grow: 1;
+  padding: 80px 20px 20px 45px;
+  height: calc(100vh - $navbar-height);
+  overflow-y: auto;
+  width: 100%;
+}
+
+a {
+  color: $dark;
+  transition: color 0.2s ease-in;
+
+  &:visited {
+    color: $blue;
+  }
+}
