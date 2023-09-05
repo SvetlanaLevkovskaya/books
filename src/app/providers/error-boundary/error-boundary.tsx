@@ -1,24 +1,33 @@
-import { useEffect } from 'react'
-import { useErrorBoundary } from 'react-error-boundary'
+import React, { Component, type ErrorInfo, type ReactNode } from 'react'
+import { PageError } from 'widgets/page-error'
 
-export const ErrorBoundaryComponent = ({ children }: any) => {
-  const showBoundary = useErrorBoundary()
+interface Props {
+  children?: ReactNode
+}
+interface State {
+  hasError: boolean
+}
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('https://jsonplaceholder.typicode.com/todos/1')
-        const json = await response.json()
-        console.log(json)
-      } catch (error) {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-expect-error
-        showBoundary(error)
-      }
+class ErrorBoundary extends Component<Props, State> {
+  public state: State = {
+    hasError: false
+  }
+
+  public static getDerivedStateFromError (_: Error): State {
+    return { hasError: true }
+  }
+
+  public componentDidCatch (error: Error, errorInfo: ErrorInfo) {
+    console.error('Uncaught error:', error, errorInfo)
+  }
+
+  public render () {
+    if (this.state.hasError) {
+      return <PageError/>
     }
 
-    void fetchData().then(r => r)
-  }, [])
-
-  return children
+    return this.props.children
+  }
 }
+
+export default ErrorBoundary

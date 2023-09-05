@@ -25,3 +25,20 @@ a {
     color: $blue;
   }
 }
+
+button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  border: none;
+  font-size: 14px;
+  color: $grey;
+  white-space: nowrap;
+  transition: background-color 0.2s ease-in;
+
+  &:hover,
+  &.activeButton {
+    color: $blue;
+  }
+}
