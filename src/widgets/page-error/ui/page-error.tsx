@@ -1,9 +1,7 @@
 import styles from './page-error.module.scss'
 
 export const PageError = () => {
-  const reloadPage = () => {
-    location.reload()
-  }
+  const reloadPage = () => { location.reload() }
 
   return (
     <div className={styles.pageError}>
