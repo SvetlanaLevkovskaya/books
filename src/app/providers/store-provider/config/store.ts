@@ -1,16 +1,19 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { type StateSchema } from 'app/providers/store-provider/config/state-schema'
-import { counterReducer } from 'entities/counter'
+import { bookListReducer } from 'entities/book-list/model/slice/book-list-slice'
 
 export function createReduxStore (initialState?: StateSchema) {
   return configureStore<StateSchema>({
     reducer: {
-      counter: counterReducer
+      books: bookListReducer
     },
     devTools: __IS_DEV__,
     preloadedState: initialState
   })
 }
+
+const store = createReduxStore()
+export type RootState = ReturnType<typeof store.getState>
 
 /* // Infer the `RootState` and `AppDispatch` types from the store itself
  export type RootState = ReturnType<typeof store.getState>

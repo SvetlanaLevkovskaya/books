@@ -1,5 +1,5 @@
-import { type CounterSchema } from 'entities/counter'
+import { type BookListSchema } from 'entities/book-list/model/types/book-list-schema'
 
 export interface StateSchema {
-  counter: CounterSchema
+  books: BookListSchema
 }
