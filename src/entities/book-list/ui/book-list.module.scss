@@ -1,5 +1,10 @@
 @import 'app/styles/variables/global';
 
+.totalItems {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
 .container {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
