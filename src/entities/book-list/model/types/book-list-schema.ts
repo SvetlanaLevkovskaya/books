@@ -1,5 +1,6 @@
 export interface BookListSchema {
   books: any[]
-  loading: boolean
+  totalItems: number
+  isLoading: boolean
   error: string | null
 }

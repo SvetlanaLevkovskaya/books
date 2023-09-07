@@ -4,7 +4,8 @@ import { fetchBookList } from 'entities/book-list/model/services/fetch-book-list
 
 const initialState: BookListSchema = {
   books: [],
-  loading: false,
+  totalItems: 0,
+  isLoading: false,
   error: null
 }
 
@@ -15,16 +16,17 @@ export const bookListSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchBookList.pending, (state) => {
-        state.loading = true
+        state.isLoading = true
         state.error = null
       })
       .addCase(fetchBookList.fulfilled, (state, action) => {
-        state.loading = false
+        state.isLoading = false
         state.error = null
         state.books = action.payload.items
+        state.totalItems = action.payload.totalItems
       })
       .addCase(fetchBookList.rejected, (state, action) => {
-        state.loading = false
+        state.isLoading = false
         state.error = action.error.message ?? null
       })
   }
