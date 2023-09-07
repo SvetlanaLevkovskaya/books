@@ -23,7 +23,6 @@ export const bookSlice = createSlice({
         state.isLoading = false
         state.error = null
         state.book = action.payload
-        console.log(action.payload)
       })
       .addCase(fetchBook.rejected, (state, action) => {
         state.isLoading = false
