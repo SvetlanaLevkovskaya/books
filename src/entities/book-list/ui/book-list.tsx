@@ -34,7 +34,7 @@ export const BookList = () => {
 
   return (
     <>
-      <div className={ styles.totalItems}>Total Items: {totalItems}</div>
+      <div className={ styles.totalItems}>Found {totalItems} results</div>
       <div className={ styles.container }>
         { books.map((item, index) => {
           const coverImage = item.volumeInfo.imageLinks?.smallThumbnail || ''
