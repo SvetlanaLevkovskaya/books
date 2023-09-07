@@ -4,6 +4,7 @@ import React, { useEffect } from 'react'
 import DOMPurify from 'dompurify'
 import { fetchBook } from 'entities/book-card/model/services/fetch-book'
 import { getBook } from 'entities/book-card/model/selectors/get-book'
+import styles from './book-card.module.scss'
 
 export const BookCard = () => {
   const { id } = useParams<{ id: string }>()
@@ -25,12 +26,17 @@ export const BookCard = () => {
   }
 
   return (
-    <>
-      <img src={book.imageLinks?.smallThumbnail} alt="cover" />
-      <h2>{book.subtitle}</h2>
-      <p>{book.authors?.join(', ')}</p>
-      <p>{book.publishedDate}</p>
-      <p dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(book.description) }}></p>
-    </>
+    <div className={styles.container}>
+      <img src={book.imageLinks?.smallThumbnail} alt="cover" className={styles.image} />
+      <div className={styles.details}>
+        <h2 className={styles.title}>{book.title}</h2>
+        <p className={styles.authors}>{book.authors?.join(', ')}</p>
+        <p className={styles.categories}>{book.categories?.join(', ')}</p>
+        <p
+          className={styles.description}
+          dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(book.description) }}
+        ></p>
+      </div>
+    </div>
   )
 }
