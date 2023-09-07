@@ -6,9 +6,10 @@ import styles from './book-list.module.scss'
 import { fetchBookList } from 'entities/book-list/model/services/fetch-book-list'
 import { getBookList } from 'entities/book-list/model/selectors/get-book-list'
 import { getTotalItems } from 'entities/book-list/model/selectors/get-total-items'
+import { type AppDispatch } from 'app/providers/store-provider/config/store'
 
 export const BookList = () => {
-  const dispatch = useDispatch()
+  const dispatch: AppDispatch = useDispatch()
   const { books, error } = useSelector(getBookList)
   const totalItems = useSelector(getTotalItems)
   const navigate = useNavigate()
@@ -21,7 +22,7 @@ export const BookList = () => {
   console.log('books', books)
 
   useEffect(() => {
-    dispatch(fetchBookList(startIndex) as any)
+    dispatch(fetchBookList(startIndex))
   }, [dispatch, startIndex])
 
   const loadMoreBooks = () => {
@@ -36,7 +37,7 @@ export const BookList = () => {
     <>
       <div className={ styles.totalItems}>Found {totalItems} results</div>
       <div className={ styles.container }>
-        { books.map((item, index) => {
+        { books?.map((item, index) => {
           const coverImage = item.volumeInfo.imageLinks?.smallThumbnail || ''
           const authors = item.volumeInfo.authors?.join(', ') || ''
           const title = item.volumeInfo.title || ''
@@ -56,7 +57,7 @@ export const BookList = () => {
           )
         }) }
       </div>
-      {books.length < totalItems && <button onClick={loadMoreBooks}>Load More</button>}
+      {books?.length < totalItems && <button onClick={loadMoreBooks}>Load More</button>}
     </>
   )
 }

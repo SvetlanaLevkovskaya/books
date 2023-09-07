@@ -5,16 +5,17 @@ import DOMPurify from 'dompurify'
 import { fetchBook } from 'entities/book-card/model/services/fetch-book'
 import { getBook } from 'entities/book-card/model/selectors/get-book'
 import styles from './book-card.module.scss'
+import { type AppDispatch } from 'app/providers/store-provider/config/store'
 
 export const BookCard = () => {
   const { id } = useParams<{ id: string }>()
-  const dispatch = useDispatch()
+  const dispatch: AppDispatch = useDispatch()
   const { book, error } = useSelector(getBook)
 
   console.log('book', book)
 
   useEffect(() => {
-    dispatch(fetchBook(id) as any)
+    dispatch(fetchBook(id))
   }, [dispatch, id])
 
   if (error) {
