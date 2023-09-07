@@ -19,6 +19,7 @@
   "devDependencies": {
     "@fortawesome/free-solid-svg-icons": "^6.4.2",
     "@fortawesome/react-fontawesome": "^0.2.0",
+    "@types/dompurify": "^3.0.2",
     "@types/dotenv-webpack": "^7.0.4",
     "@types/node": "^20.5.7",
     "@types/react": "^18.2.21",
@@ -52,6 +53,7 @@
     "@reduxjs/toolkit": "^1.9.5",
     "@types/react-router-dom": "^5.3.3",
     "axios": "^1.5.0",
+    "dompurify": "^3.0.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-error-boundary": "^4.0.11",

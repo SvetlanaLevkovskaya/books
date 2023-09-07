@@ -1,7 +1,7 @@
 import { type RouteProps } from 'react-router-dom'
 import { MainPage } from 'pages/main-page'
 import { NotFoundPage } from 'pages/not-found-page'
-import { BookPage } from 'pages/book'
+import { BookPage } from 'pages/book-page'
 
 export enum AppRoutes {
   MAIN = 'main',
@@ -11,7 +11,7 @@ export enum AppRoutes {
 
 export const RoutePath: Record<AppRoutes, string> = {
   [AppRoutes.MAIN]: '/',
-  [AppRoutes.BOOK]: '/book',
+  [AppRoutes.BOOK]: '/book/:id',
   [AppRoutes.NOT_FOUND]: '*'
 }
 
