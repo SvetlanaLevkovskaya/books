@@ -10,10 +10,11 @@ import { bookListActions } from 'entities/book-list/model/slice/book-list-slice'
 import { getSearchTerm } from 'features/book-search/model/selectors/get-search-term'
 import { getFilter } from 'features/book-filter/model/selectors/get-filter'
 import { getSort } from 'features/book-sort/model/selectors/get-sort'
+import { Loader } from 'shared/loader'
 
 export const BookList = () => {
   const dispatch: AppDispatch = useDispatch()
-  const { books, error, totalItems, startIndex } = useSelector(getBooks)
+  const { books, error, totalItems, startIndex, isLoading } = useSelector(getBooks)
   const searchTerm = useSelector(getSearchTerm)
   const filter = useSelector(getFilter)
   const sort = useSelector(getSort)
@@ -37,10 +38,13 @@ export const BookList = () => {
   if (error) {
     return <p>Error: { error }</p>
   }
+  if (isLoading) {
+    return <Loader />
+  }
 
   return (
     <>
-      <div className={ styles.totalItems}>Found {totalItems} results</div>
+      <div className={ styles.totalItems }>Found { totalItems } results</div>
       <div className={ styles.container }>
         { books?.map((item, index) => {
           const coverImage = item.volumeInfo.imageLinks?.smallThumbnail || ''
@@ -52,7 +56,7 @@ export const BookList = () => {
             <div
               key={ index }
               className={ styles.item }
-              onClick={() => { handleBookClick(item) }}
+              onClick={ () => { handleBookClick(item) } }
             >
               <img src={ coverImage } alt="cover" className={ styles.image } />
               <p className={ styles.title } data-full-title={ title }>{ title }</p>
@@ -62,7 +66,7 @@ export const BookList = () => {
           )
         }) }
       </div>
-      {books?.length < totalItems && <button onClick={loadMoreBooks}>Load More</button>}
+      { books?.length < totalItems && <button onClick={ loadMoreBooks }>Load More</button> }
     </>
   )
 }
