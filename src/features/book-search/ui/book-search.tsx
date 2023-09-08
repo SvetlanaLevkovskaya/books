@@ -24,18 +24,15 @@ export const BookSearch = () => {
   }
 
   return (
-    <>
-      <div className={styles.search}>
-        <input
-          type="text"
-          value={search}
-          onChange={handleChange}
-          onKeyDown={handleKeyDown}
-          placeholder="Search books..."
-        />
-        <button onClick={handleSearch}>Search</button>
-      </div>
-
-    </>
+    <div className={styles.search}>
+      <input
+        type="text"
+        value={search}
+        onChange={handleChange}
+        onKeyDown={handleKeyDown}
+        placeholder="Search books..."
+      />
+      <button onClick={handleSearch}>Search</button>
+    </div>
   )
 }

@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 import { type BookListSchema } from 'entities/book-list/model/types/book-list-schema'
 import { fetchBookList } from 'entities/book-list/model/services/fetch-book-list'
 import { bookSearchActions } from 'features/book-search/model/slice/book-search-slice'
+import { bookFilterActions } from 'features/book-filter/model/slice/book-filter-slice'
 
 const initialState: BookListSchema = {
   books: [],
@@ -36,6 +37,9 @@ export const bookListSlice = createSlice({
         state.error = action.error.message ?? null
       })
       .addCase(bookSearchActions.setSearchTerm.type, (state) => {
+        state.books = []
+      })
+      .addCase(bookFilterActions.setFilter.type, (state) => {
         state.books = []
       })
   }

@@ -8,14 +8,15 @@ export const MAX_RESULTS = 30
 interface FetchBookListType {
   startIndex: number
   searchTerm: string
+  filter: string
 }
 
-export const fetchBookList = createAsyncThunk('books/fetchBooks', async ({ startIndex, searchTerm }: FetchBookListType,
+export const fetchBookList = createAsyncThunk('books/fetchBooks', async ({ startIndex, searchTerm, filter }: FetchBookListType,
   { getState }: { getState: any }) => {
   try {
     const response = await axios.get(`${process.env.BASE_URL}/volumes`, {
       params: {
-        q: searchTerm || 'js',
+        q: `${searchTerm}+subject:${filter}`,
         key: process.env.NEXT_PUBLIC_GOOGLE_BOOKS_API_KEY,
         startIndex: 0,
         maxResults: MAX_RESULTS
@@ -26,6 +27,6 @@ export const fetchBookList = createAsyncThunk('books/fetchBooks', async ({ start
     response.data.items = [...prevBooks, ...newBooks]
     return response.data
   } catch (error: any) {
-    throw new Error(`Failed to fetch products: ${error.message}`)
+    throw new Error(`Failed to fetch books: ${error.message}`)
   }
 })

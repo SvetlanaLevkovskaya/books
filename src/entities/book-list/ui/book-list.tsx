@@ -8,11 +8,13 @@ import { getBooks } from 'entities/book-list/model/selectors/get-book-list'
 import { type AppDispatch } from 'app/providers/store-provider/config/store'
 import { bookListActions } from 'entities/book-list/model/slice/book-list-slice'
 import { getSearchTerm } from 'features/book-search/model/selectors/get-search-term'
+import { getFilter } from 'features/book-filter/model/selectors/get-filter'
 
 export const BookList = () => {
   const dispatch: AppDispatch = useDispatch()
   const { books, error, totalItems, startIndex } = useSelector(getBooks)
   const searchTerm = useSelector(getSearchTerm)
+  const filter = useSelector(getFilter)
   const navigate = useNavigate()
 
   const handleBookClick = (book: any) => {
@@ -22,8 +24,8 @@ export const BookList = () => {
   console.log('startIndex', startIndex)
 
   useEffect(() => {
-    dispatch(fetchBookList({ startIndex, searchTerm }))
-  }, [dispatch, startIndex, searchTerm])
+    dispatch(fetchBookList({ startIndex, searchTerm, filter }))
+  }, [dispatch, startIndex, searchTerm, filter])
 
   const loadMoreBooks = () => {
     dispatch(bookListActions.setStartIndex(startIndex + MAX_RESULTS))

@@ -3,13 +3,15 @@ import { type StateSchema } from 'app/providers/store-provider/config/state-sche
 import { bookListReducer } from 'entities/book-list/model/slice/book-list-slice'
 import { bookReducer } from 'entities/book-card/model/slice/book-slice'
 import { bookSearchReducer } from 'features/book-search/model/slice/book-search-slice'
+import { bookFilterReducer } from 'features/book-filter/model/slice/book-filter-slice'
 
 export function createReduxStore (initialState?: StateSchema) {
   return configureStore<StateSchema>({
     reducer: {
       books: bookListReducer,
       book: bookReducer,
-      bookSearch: bookSearchReducer
+      bookSearch: bookSearchReducer,
+      bookFilter: bookFilterReducer
     },
     devTools: __IS_DEV__,
     preloadedState: initialState
