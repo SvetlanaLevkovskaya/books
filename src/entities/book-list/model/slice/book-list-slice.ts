@@ -3,6 +3,7 @@ import { type BookListSchema } from 'entities/book-list/model/types/book-list-sc
 import { fetchBookList } from 'entities/book-list/model/services/fetch-book-list'
 import { bookSearchActions } from 'features/book-search/model/slice/book-search-slice'
 import { bookFilterActions } from 'features/book-filter/model/slice/book-filter-slice'
+import { bookSortActions } from 'features/book-sort/model/slice/book-sort-slice'
 
 const initialState: BookListSchema = {
   books: [],
@@ -40,6 +41,9 @@ export const bookListSlice = createSlice({
         state.books = []
       })
       .addCase(bookFilterActions.setFilter.type, (state) => {
+        state.books = []
+      })
+      .addCase(bookSortActions.setSort.type, (state) => {
         state.books = []
       })
   }

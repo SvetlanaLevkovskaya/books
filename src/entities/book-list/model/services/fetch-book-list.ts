@@ -9,14 +9,16 @@ interface FetchBookListType {
   startIndex: number
   searchTerm: string
   filter: string
+  sort: string
 }
 
-export const fetchBookList = createAsyncThunk('books/fetchBooks', async ({ startIndex, searchTerm, filter }: FetchBookListType,
+export const fetchBookList = createAsyncThunk('books/fetchBooks', async ({ startIndex, searchTerm, filter, sort }: FetchBookListType,
   { getState }: { getState: any }) => {
   try {
     const response = await axios.get(`${process.env.BASE_URL}/volumes`, {
       params: {
         q: `${searchTerm}+subject:${filter}`,
+        orderBy: sort || 'relevance',
         key: process.env.NEXT_PUBLIC_GOOGLE_BOOKS_API_KEY,
         startIndex: 0,
         maxResults: MAX_RESULTS

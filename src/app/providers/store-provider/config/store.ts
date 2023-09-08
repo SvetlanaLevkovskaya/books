@@ -4,6 +4,7 @@ import { bookListReducer } from 'entities/book-list/model/slice/book-list-slice'
 import { bookReducer } from 'entities/book-card/model/slice/book-slice'
 import { bookSearchReducer } from 'features/book-search/model/slice/book-search-slice'
 import { bookFilterReducer } from 'features/book-filter/model/slice/book-filter-slice'
+import { bookSortReducer } from 'features/book-sort/model/slice/book-sort-slice'
 
 export function createReduxStore (initialState?: StateSchema) {
   return configureStore<StateSchema>({
@@ -11,7 +12,8 @@ export function createReduxStore (initialState?: StateSchema) {
       books: bookListReducer,
       book: bookReducer,
       bookSearch: bookSearchReducer,
-      bookFilter: bookFilterReducer
+      bookFilter: bookFilterReducer,
+      bookSort: bookSortReducer
     },
     devTools: __IS_DEV__,
     preloadedState: initialState
