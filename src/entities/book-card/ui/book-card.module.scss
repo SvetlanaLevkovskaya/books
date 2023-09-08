@@ -1,14 +1,15 @@
 @import 'app/styles/variables/global';
 
 .container {
+  padding: 20px;
   display: flex;
   align-items: flex-start;
+  gap: 35px;
 }
 
 .image {
   width: 575px;
   height: auto;
-  margin-right: 20px;
 }
 
 .details {

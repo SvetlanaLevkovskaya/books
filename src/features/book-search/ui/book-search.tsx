@@ -4,13 +4,16 @@ import { useDispatch } from 'react-redux'
 import styles from './book-search.module.scss'
 import { type AppDispatch } from 'app/providers/store-provider/config/store'
 import { bookSearchActions } from 'features/book-search/model/slice/book-search-slice'
+import { useNavigate } from 'react-router-dom'
 
 export const BookSearch = () => {
   const dispatch: AppDispatch = useDispatch()
+  const navigate = useNavigate()
   const [search, setSearch] = useState('')
 
   const handleSearch = () => {
     dispatch(bookSearchActions.setSearchTerm(search))
+    navigate('/')
   }
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {

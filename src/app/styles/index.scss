@@ -6,14 +6,17 @@ body {
   background-color:  $light-grey;
   color: $dark;
   font-size: 16px;
-  line-height: 20px
+  line-height: 20px;
+  overflow: hidden;
+
 }
 
 .page-wrapper {
   flex-grow: 1;
-  padding: 45px 45px 20px 45px;
+  padding: 80px 45px 10px 45px;
   height: calc(100vh - $navbar-height);
   width: 100%;
+  overflow: auto;
 }
 
 a {

@@ -23,9 +23,6 @@ export const BookList = () => {
   const handleBookClick = (book: any) => {
     navigate(`/book/${book.id}`)
   }
-  console.log('books', books)
-  console.log('startIndex', startIndex)
-  console.log('sort', sort)
 
   useEffect(() => {
     dispatch(fetchBookList({ startIndex, searchTerm, filter, sort }))
@@ -38,6 +35,7 @@ export const BookList = () => {
   if (error) {
     return <p>Error: { error }</p>
   }
+
   if (isLoading) {
     return <Loader />
   }
