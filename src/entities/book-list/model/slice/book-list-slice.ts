@@ -1,18 +1,24 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { type BookListSchema } from 'entities/book-list/model/types/book-list-schema'
 import { fetchBookList } from 'entities/book-list/model/services/fetch-book-list'
+import { bookSearchActions } from 'features/book-search/model/slice/book-search-slice'
 
 const initialState: BookListSchema = {
   books: [],
   totalItems: 0,
   isLoading: false,
-  error: null
+  error: null,
+  startIndex: 0
 }
 
 export const bookListSlice = createSlice({
   name: 'books',
   initialState,
-  reducers: {},
+  reducers: {
+    setStartIndex: (state, action) => {
+      state.startIndex = action.payload
+    }
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchBookList.pending, (state) => {
@@ -28,6 +34,9 @@ export const bookListSlice = createSlice({
       .addCase(fetchBookList.rejected, (state, action) => {
         state.isLoading = false
         state.error = action.error.message ?? null
+      })
+      .addCase(bookSearchActions.setSearchTerm.type, (state) => {
+        state.books = []
       })
   }
 })

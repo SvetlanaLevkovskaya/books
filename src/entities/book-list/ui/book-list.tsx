@@ -1,32 +1,32 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 import styles from './book-list.module.scss'
-import { fetchBookList } from 'entities/book-list/model/services/fetch-book-list'
-import { getBookList } from 'entities/book-list/model/selectors/get-book-list'
-import { getTotalItems } from 'entities/book-list/model/selectors/get-total-items'
+import { fetchBookList, MAX_RESULTS } from 'entities/book-list/model/services/fetch-book-list'
+import { getBooks } from 'entities/book-list/model/selectors/get-book-list'
 import { type AppDispatch } from 'app/providers/store-provider/config/store'
+import { bookListActions } from 'entities/book-list/model/slice/book-list-slice'
+import { getSearchTerm } from 'features/book-search/model/selectors/get-search-term'
 
 export const BookList = () => {
   const dispatch: AppDispatch = useDispatch()
-  const { books, error } = useSelector(getBookList)
-  const totalItems = useSelector(getTotalItems)
+  const { books, error, totalItems, startIndex } = useSelector(getBooks)
+  const searchTerm = useSelector(getSearchTerm)
   const navigate = useNavigate()
-  const [startIndex, setStartIndex] = useState(0)
 
   const handleBookClick = (book: any) => {
     navigate(`/book/${book.id}`)
   }
-
   console.log('books', books)
+  console.log('startIndex', startIndex)
 
   useEffect(() => {
-    dispatch(fetchBookList(startIndex))
-  }, [dispatch, startIndex])
+    dispatch(fetchBookList({ startIndex, searchTerm }))
+  }, [dispatch, startIndex, searchTerm])
 
   const loadMoreBooks = () => {
-    setStartIndex((prevIndex) => prevIndex + 30)
+    dispatch(bookListActions.setStartIndex(startIndex + MAX_RESULTS))
   }
 
   if (error) {

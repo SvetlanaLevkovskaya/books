@@ -1,17 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 
 import styles from './book-search.module.scss'
 import { type AppDispatch } from 'app/providers/store-provider/config/store'
-import { searchBook } from 'features/book-search/model/services/search-book'
+import { bookSearchActions } from 'features/book-search/model/slice/book-search-slice'
 
 export const BookSearch = () => {
   const dispatch: AppDispatch = useDispatch()
   const [search, setSearch] = useState('')
 
   const handleSearch = () => {
-    dispatch(searchBook(search))
-    setSearch('')
+    dispatch(bookSearchActions.setSearchTerm(search))
   }
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -23,10 +22,6 @@ export const BookSearch = () => {
       handleSearch()
     }
   }
-
-  useEffect(() => {
-    handleSearch()
-  }, [])
 
   return (
     <>
