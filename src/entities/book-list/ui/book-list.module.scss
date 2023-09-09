@@ -48,6 +48,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     position: relative;
+    z-index: -1;
 
     &:hover {
       white-space: normal;
