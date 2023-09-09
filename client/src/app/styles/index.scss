@@ -1,0 +1,46 @@
+@import "reset";
+@import "global";
+
+body {
+  font-family: $font-main;
+  background-color:  $light-grey;
+  color: $dark;
+  font-size: 16px;
+  line-height: 20px;
+  overflow: hidden;
+
+}
+
+.page-wrapper {
+  flex-grow: 1;
+  padding: 80px 45px 10px 45px;
+  height: calc(100vh - $navbar-height);
+  width: 100%;
+  overflow: auto;
+}
+
+a {
+  color: $dark;
+  transition: color 0.2s ease-in;
+
+  &:visited {
+    color: $blue;
+  }
+}
+
+button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  border: none;
+  font-size: 14px;
+  color: $grey;
+  white-space: nowrap;
+  transition: background-color 0.2s ease-in;
+
+  &:hover,
+  &.activeButton {
+    color: $blue;
+  }
+}

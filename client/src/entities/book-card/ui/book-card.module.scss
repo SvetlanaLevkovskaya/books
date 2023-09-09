@@ -1,0 +1,39 @@
+@import 'global';
+
+.container {
+  padding: 20px;
+  display: flex;
+  align-items: flex-start;
+  gap: 35px;
+}
+
+.image {
+  width: 575px;
+  height: auto;
+}
+
+.details {
+  flex: 1;
+}
+
+.title {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.authors {
+  font-size: 16px;
+  margin-bottom: 5px;
+  color: #888;
+}
+
+.categories {
+  font-size: 16px;
+  margin-bottom: 10px;
+  color: #888;
+}
+
+.description {
+  font-size: 16px;
+  line-height: 1.5;
+}
