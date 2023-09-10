@@ -45,10 +45,10 @@ export const BookList = () => {
       <div className={ styles.totalItems }>Found { totalItems } results</div>
       <div className={ styles.container }>
         { books?.map((item, index) => {
-          const coverImage = item.volumeInfo.imageLinks?.smallThumbnail || ''
-          const authors = item.volumeInfo.authors?.join(', ') || ''
-          const title = item.volumeInfo.title || ''
-          const categories = item.volumeInfo.categories?.[0] || ''
+          const coverImage = item.volumeInfo.imageLinks?.smallThumbnail ?? ''
+          const authors = item.volumeInfo.authors?.join(', ') ?? ''
+          const title = item.volumeInfo.title ?? ''
+          const categories = item.volumeInfo.categories?.[0] ?? ''
 
           return (
             <div

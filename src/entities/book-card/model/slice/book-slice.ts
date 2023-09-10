@@ -3,7 +3,15 @@ import { type BookSchema } from 'entities/book-card/model/types/book-schema'
 import { fetchBook } from 'entities/book-card/model/services/fetch-book'
 
 const initialState: BookSchema = {
-  book: null,
+  book: {
+    title: 'No Title Available',
+    authors: [],
+    categories: [],
+    imageLinks: {
+      smallThumbnail: 'No Image Available'
+    },
+    description: 'No Description Available'
+  },
   isLoading: false,
   error: null
 }
