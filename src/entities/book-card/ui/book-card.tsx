@@ -6,11 +6,12 @@ import { fetchBook } from 'entities/book-card/model/services/fetch-book'
 import { getBook } from 'entities/book-card/model/selectors/get-book'
 import styles from './book-card.module.scss'
 import { type AppDispatch } from 'app/providers/store-provider/config/store'
+import { Loader } from 'shared/loader'
 
 export const BookCard = () => {
   const { id } = useParams<{ id: string }>()
   const dispatch: AppDispatch = useDispatch()
-  const { book, error } = useSelector(getBook)
+  const { book, error, isLoading } = useSelector(getBook)
 
   console.log('book', book)
 
@@ -20,6 +21,10 @@ export const BookCard = () => {
 
   if (error) {
     return <div>Error: {error}</div>
+  }
+
+  if (isLoading) {
+    return <Loader />
   }
 
   if (!book) {
