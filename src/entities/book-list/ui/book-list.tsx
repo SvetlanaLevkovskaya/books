@@ -56,7 +56,7 @@ export const BookList = () => {
               className={ styles.item }
               onClick={ () => { handleBookClick(item) } }
             >
-              <img src={ coverImage } alt="cover" className={ styles.image } />
+              <img src={ coverImage } alt="cover" className={ styles.image } loading='lazy'/>
               <p className={ styles.title } data-full-title={ title }>{ title }</p>
               <p className={ styles.authors }>{ authors }</p>
               <p className={ styles.authors }>{ categories }</p>
