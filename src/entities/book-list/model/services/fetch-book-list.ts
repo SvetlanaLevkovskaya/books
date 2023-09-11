@@ -1,7 +1,9 @@
-import { createAsyncThunk } from '@reduxjs/toolkit'
+import { createAsyncThunk, type SerializedError } from '@reduxjs/toolkit'
 import axios from 'axios'
 import * as process from 'process'
 import { getBooks } from 'entities/book-list/model/selectors/get-book-list'
+import { type Book } from 'entities/book-list/model/types/book-list-schema'
+import { type RootState } from 'app/providers/store-provider/config/store'
 
 export const MAX_RESULTS = 30
 
@@ -12,8 +14,13 @@ interface FetchBookListType {
   sort: string
 }
 
-export const fetchBookList = createAsyncThunk('books/fetchBooks', async ({ startIndex, searchTerm, filter, sort }: FetchBookListType,
-  { getState }: { getState: any }) => {
+interface BookApiResponse {
+  items: Book[]
+  totalItems: number
+}
+
+export const fetchBookList = createAsyncThunk<BookApiResponse, FetchBookListType, { rejectValue: SerializedError }>('books/fetchBooks', async ({ startIndex, searchTerm, filter, sort }: FetchBookListType,
+  { getState }) => {
   try {
     const response = await axios.get(`${process.env.BASE_URL}/volumes`, {
       params: {
@@ -24,7 +31,7 @@ export const fetchBookList = createAsyncThunk('books/fetchBooks', async ({ start
         maxResults: MAX_RESULTS
       }
     })
-    const prevBooks = getBooks(getState()).books
+    const prevBooks = getBooks(getState() as RootState).books
     const newBooks = response.data.items
     response.data.items = [...prevBooks, ...newBooks]
     return response.data

@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
 import { type BookSearchSchema } from 'features/book-search/model/types/book-search-schema'
 
 const initialState: BookSearchSchema = {
@@ -9,7 +9,7 @@ export const bookSearchSlice = createSlice({
   name: 'bookSearch',
   initialState,
   reducers: {
-    setSearchTerm: (state, action) => {
+    setSearchTerm: (state, action: PayloadAction<string>) => {
       state.searchTerm = action.payload
     },
 

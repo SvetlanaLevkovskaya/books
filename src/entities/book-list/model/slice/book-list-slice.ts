@@ -1,5 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit'
-import { type BookListSchema } from 'entities/book-list/model/types/book-list-schema'
+import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
+import { type Book, type BookListSchema } from 'entities/book-list/model/types/book-list-schema'
 import { fetchBookList } from 'entities/book-list/model/services/fetch-book-list'
 import { bookSearchActions } from 'features/book-search/model/slice/book-search-slice'
 import { bookFilterActions } from 'features/book-filter/model/slice/book-filter-slice'
@@ -17,7 +17,7 @@ export const bookListSlice = createSlice({
   name: 'books',
   initialState,
   reducers: {
-    setStartIndex: (state, action) => {
+    setStartIndex: (state, action: PayloadAction<number>) => {
       state.startIndex = action.payload
     }
   },
@@ -27,7 +27,7 @@ export const bookListSlice = createSlice({
         state.isLoading = true
         state.error = null
       })
-      .addCase(fetchBookList.fulfilled, (state, action) => {
+      .addCase(fetchBookList.fulfilled, (state, action: PayloadAction<{ items: Book[], totalItems: number }>) => {
         state.isLoading = false
         state.error = null
         state.books = action.payload.items

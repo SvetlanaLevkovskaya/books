@@ -1,5 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit'
-import { type BookSchema } from 'entities/book-card/model/types/book-schema'
+import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
+import { type BookItems, type BookSchema } from 'entities/book-card/model/types/book-schema'
 import { fetchBook } from 'entities/book-card/model/services/fetch-book'
 
 const initialState: BookSchema = {
@@ -27,7 +27,7 @@ export const bookSlice = createSlice({
         state.isLoading = true
         state.error = null
       })
-      .addCase(fetchBook.fulfilled, (state, action) => {
+      .addCase(fetchBook.fulfilled, (state, action: PayloadAction<BookItems>) => {
         state.isLoading = false
         state.error = null
         state.book = action.payload

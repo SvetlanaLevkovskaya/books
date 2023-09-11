@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
 import { type BookFilterSchema } from 'features/book-filter/model/types/book-filter'
 
 const initialState: BookFilterSchema = {
@@ -9,7 +9,7 @@ export const bookFilterSlice = createSlice({
   name: 'bookFilter',
   initialState,
   reducers: {
-    setFilter: (state, action) => {
+    setFilter: (state, action: PayloadAction<string>) => {
       state.filter = action.payload
     },
 

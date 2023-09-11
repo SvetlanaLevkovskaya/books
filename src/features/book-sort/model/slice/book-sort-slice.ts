@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
 import { type BookSortSchema } from 'features/book-sort/model/types/book-sort'
 
 const initialState: BookSortSchema = {
@@ -9,7 +9,7 @@ export const bookSortSlice = createSlice({
   name: 'bookSort',
   initialState,
   reducers: {
-    setSort: (state, action) => {
+    setSort: (state, action: PayloadAction<string>) => {
       state.sort = action.payload
     },
 

@@ -1,4 +1,4 @@
-interface Book {
+export interface BookItems {
   title: string
   authors: string[]
   categories: string[]
@@ -8,7 +8,7 @@ interface Book {
   description: string
 }
 export interface BookSchema {
-  book: Book
+  book: BookItems
   isLoading: boolean
   error: string | null
 }
