@@ -11,6 +11,7 @@ import { getSearchTerm } from 'features/book-search/model/selectors/get-search-t
 import { getFilterOption } from 'features/book-filter/model/selectors/get-filter-option'
 import { getSortOption } from 'features/book-sort/model/selectors/get-sort-option'
 import { Loader } from 'shared/loader'
+import { PageError } from 'widgets/page-error'
 
 export const BookList = () => {
   const dispatch: AppDispatch = useDispatch()
@@ -33,7 +34,7 @@ export const BookList = () => {
   }
 
   if (error) {
-    return <p>Error: { error }</p>
+    return <PageError error={error}/>
   }
 
   if (isLoading) {

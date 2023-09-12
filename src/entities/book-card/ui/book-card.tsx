@@ -7,6 +7,7 @@ import { getBook } from 'entities/book-card/model/selectors/get-book'
 import styles from './book-card.module.scss'
 import { type AppDispatch } from 'app/providers/store-provider/config/store'
 import { Loader } from 'shared/loader'
+import { PageError } from 'widgets/page-error'
 
 export const BookCard = () => {
   const { id } = useParams<{ id: string }>()
@@ -20,7 +21,7 @@ export const BookCard = () => {
   }, [dispatch, id])
 
   if (error) {
-    return <div>Error: {error}</div>
+    return <PageError error={error}/>
   }
 
   if (isLoading) {
