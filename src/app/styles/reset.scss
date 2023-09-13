@@ -1,4 +1,5 @@
-/* Reset and base styles  */
+@import 'app/styles/variables/global';
+
 * {
   padding: 0;
   margin: 0;
@@ -13,11 +14,11 @@
 
 /* Links */
 
-a, a:link, a:visited  {
+a, a:link, a:visited {
   text-decoration: none;
 }
 
-a:hover  {
+a:hover {
   text-decoration: none;
 }
 
@@ -88,10 +89,10 @@ legend {
 
 select {
   appearance: none;
+  outline: none;
   line-height: normal;
   position: relative;
   background-position: right 10px top 50%;
   background-repeat: no-repeat;
   background-image: url('../../assets/select1.svg');
 }
-
