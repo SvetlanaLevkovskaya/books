@@ -36,9 +36,11 @@ export const BookCard = () => {
     <div className={styles.container}>
       <img src={book.imageLinks?.smallThumbnail} alt="cover" className={styles.image} />
       <div className={styles.details}>
+        <p className={styles.categories}>{book.categories?.join(', ')}</p>
+
         <h2 className={styles.title}>{book.title}</h2>
         <p className={styles.authors}>{book.authors?.join(', ')}</p>
-        <p className={styles.categories}>{book.categories?.join(', ')}</p>
+
         <p
           className={styles.description}
           dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(book.description) }}
