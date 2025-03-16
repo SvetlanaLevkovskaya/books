@@ -1,4 +1,4 @@
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import React, { useEffect } from 'react'
 import DOMPurify from 'dompurify'
@@ -12,27 +12,30 @@ import { PageError } from 'widgets/page-error'
 export const BookCard = () => {
   const { id } = useParams<{ id: string }>()
   const dispatch: AppDispatch = useDispatch()
-  const { book, error, isLoading } = useSelector(getBook)
+  const {
+    book,
+    error,
+    isLoading,
+  } = useSelector(getBook)
 
   useEffect(() => {
     dispatch(fetchBook(id))
   }, [dispatch, id])
 
-  if (error) {
-    return <PageError error={error}/>
-  }
+  if (isLoading) return <Loader />
+  if (error) return <PageError error={error} />
+  if (!book) return null
 
-  if (isLoading) {
-    return <Loader />
-  }
-
-  if (!book) {
-    return null
-  }
+  console.log(book.imageLinks)
 
   return (
     <div className={styles.container}>
-      <img src={book.imageLinks?.smallThumbnail} alt="cover" className={styles.image} />
+      <img src={book.imageLinks?.smallThumbnail ||
+        book.imageLinks?.large ||
+        book.imageLinks?.extraLarge ||
+        book.imageLinks?.medium ||
+        book.imageLinks?.thumbnail ||
+        book.imageLinks?.small} alt="cover" className={styles.image} />
       <div className={styles.details}>
         <p className={styles.categories}>{book.categories?.join(', ')}</p>
 

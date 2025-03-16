@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { ChangeEvent, KeyboardEvent, useState } from 'react'
 import { useDispatch } from 'react-redux'
 
 import styles from './book-search.module.scss'
@@ -16,11 +16,11 @@ export const BookSearch = () => {
     navigate('/')
   }
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setSearch(event.currentTarget.value)
   }
 
-  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
       handleSearch()
     }
@@ -34,6 +34,7 @@ export const BookSearch = () => {
         onChange={handleChange}
         onKeyDown={handleKeyDown}
         placeholder="Search books..."
+        autoFocus
       />
       <button onClick={handleSearch}>Search</button>
     </div>

@@ -4,8 +4,6 @@ import { type BookFilterSchema } from 'features/book-filter/model/types/book-fil
 const initialState: BookFilterSchema = {
   filter: ''
 }
-
-debugger
 export const bookFilterSlice = createSlice({
   name: 'bookFilter',
   initialState,

@@ -9,4 +9,8 @@
   width: 50%;
   border: 1px solid $dark;
   border-radius: 0.25rem;
+
+  & input {
+    width: 100%;
+  }
 }

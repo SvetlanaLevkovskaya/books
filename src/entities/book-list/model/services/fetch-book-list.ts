@@ -21,8 +21,13 @@ interface BookApiResponse {
 
 export const fetchBookList = createAsyncThunk<BookApiResponse, FetchBookListType,
 { rejectValue: SerializedError }>('books/fetchBooks',
-  async ({ startIndex, searchTerm, filterOption, sortOption }: FetchBookListType,
-    { getState }) => {
+  async ({
+    startIndex,
+    searchTerm,
+    filterOption,
+    sortOption
+  }: FetchBookListType,
+  { getState }) => {
     try {
       const response = await axios.get(`${process.env.BASE_URL}/volumes`, {
         params: {
@@ -37,7 +42,9 @@ export const fetchBookList = createAsyncThunk<BookApiResponse, FetchBookListType
       const newBooks = response.data.items
       response.data.items = [...prevBooks, ...newBooks]
       return response.data
-    } catch (error: any) {
-      throw new Error(`Failed to fetch books: ${error.message}`)
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        throw new Error(`Failed to fetch books: ${error.message}`)
+      }
     }
   })

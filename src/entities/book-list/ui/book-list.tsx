@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useCallback, useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
@@ -20,37 +20,42 @@ export const BookList = () => {
     error,
     totalItems,
     startIndex,
-    isLoading
+    isLoading,
   } = useSelector(getBooks)
   const searchTerm = useSelector(getSearchTerm)
   const filterOption = useSelector(getFilterOption)
   const sortOption = useSelector(getSortOption)
   const navigate = useNavigate()
 
-  const handleBookClick = (book: any) => {
-    navigate(`/book/${book.id}`)
-  }
+  const observer = useRef<IntersectionObserver | null>(null)
+
+  const lastBookRef = useCallback(
+    (node: HTMLDivElement | null) => {
+      if (isLoading) return
+      if (observer.current) observer.current.disconnect()
+
+      observer.current = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting && books.length < totalItems) {
+          dispatch(bookListActions.setStartIndex(startIndex + MAX_RESULTS))
+        }
+      })
+
+      if (node) observer.current.observe(node)
+    },
+    [isLoading, books.length, totalItems, dispatch, startIndex]
+  )
 
   useEffect(() => {
     dispatch(fetchBookList({
       startIndex,
       searchTerm,
       filterOption,
-      sortOption
+      sortOption,
     }))
   }, [dispatch, startIndex, searchTerm, filterOption, sortOption])
 
-  const loadMoreBooks = () => {
-    dispatch(bookListActions.setStartIndex(startIndex + MAX_RESULTS))
-  }
-
-  if (error) {
-    return <PageError error={error} />
-  }
-
-  if (isLoading) {
-    return <Loader />
-  }
+  if (isLoading && books.length === 0) return <Loader />
+  if (error) return <PageError error={error} />
 
   return (
     <>
@@ -66,7 +71,8 @@ export const BookList = () => {
             <div
               key={index}
               className={styles.item}
-              onClick={() => { handleBookClick(item) }}
+              onClick={() => navigate(`/book/${item.id}`)}
+              ref={index === books.length - 1 ? lastBookRef : null}
             >
               <img src={coverImage} alt="cover" className={styles.image} loading="lazy" />
               <p className={styles.title} data-full-title={title}>{title}</p>
@@ -76,7 +82,7 @@ export const BookList = () => {
           )
         })}
       </div>
-      {books?.length < totalItems && <button onClick={loadMoreBooks}>Load More</button>}
+      {isLoading && <Loader />}
     </>
   )
 }

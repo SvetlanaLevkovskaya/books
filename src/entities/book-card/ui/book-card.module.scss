@@ -7,13 +7,22 @@
   gap: 2.2rem;
 
   .image {
-    width: 30%;
+    width: 20%;
+    max-width: 200px;
+    height: auto;
     background-color: white;
     box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.5);
+    object-fit: cover;
   }
 
   .details {
     flex: 1;
+
+    .categories {
+      margin-bottom: 1rem;
+      font-size: 0.8rem;
+      color: #888;
+    }
 
     .title {
       font-size: 1.5rem;
@@ -25,15 +34,7 @@
       color: #888;
     }
 
-    .categories {
-      margin-bottom: 1rem;
-      font-size: 0.8rem;
-      color: #888;
-    }
-
-    .description {
-      border: 1px solid #c5c0c0;
-      border-radius: 2px;
+     .description {
       padding: 0.8rem;
       line-height: 1.5;
     }
