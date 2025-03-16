@@ -15,7 +15,13 @@ import { PageError } from 'widgets/page-error'
 
 export const BookList = () => {
   const dispatch: AppDispatch = useDispatch()
-  const { books, error, totalItems, startIndex, isLoading } = useSelector(getBooks)
+  const {
+    books,
+    error,
+    totalItems,
+    startIndex,
+    isLoading
+  } = useSelector(getBooks)
   const searchTerm = useSelector(getSearchTerm)
   const filterOption = useSelector(getFilterOption)
   const sortOption = useSelector(getSortOption)
@@ -26,7 +32,12 @@ export const BookList = () => {
   }
 
   useEffect(() => {
-    dispatch(fetchBookList({ startIndex, searchTerm, filterOption, sortOption }))
+    dispatch(fetchBookList({
+      startIndex,
+      searchTerm,
+      filterOption,
+      sortOption
+    }))
   }, [dispatch, startIndex, searchTerm, filterOption, sortOption])
 
   const loadMoreBooks = () => {
@@ -34,7 +45,7 @@ export const BookList = () => {
   }
 
   if (error) {
-    return <PageError error={error}/>
+    return <PageError error={error} />
   }
 
   if (isLoading) {
@@ -43,9 +54,9 @@ export const BookList = () => {
 
   return (
     <>
-      <div className={ styles.totalItems }>Found { totalItems } results</div>
-      <div className={ styles.container }>
-        { books?.map((item, index) => {
+      <div className={styles.totalItems}>Found {totalItems} results</div>
+      <div className={styles.container}>
+        {books?.map((item, index) => {
           const coverImage = item.volumeInfo.imageLinks?.smallThumbnail ?? ''
           const authors = item.volumeInfo.authors?.join(', ') ?? ''
           const title = item.volumeInfo.title ?? ''
@@ -53,19 +64,19 @@ export const BookList = () => {
 
           return (
             <div
-              key={ index }
-              className={ styles.item }
-              onClick={ () => { handleBookClick(item) } }
+              key={index}
+              className={styles.item}
+              onClick={() => { handleBookClick(item) }}
             >
-              <img src={ coverImage } alt="cover" className={ styles.image } loading='lazy'/>
-              <p className={ styles.title } data-full-title={ title }>{ title }</p>
-              <p className={ styles.authors }>{ authors }</p>
-              <p className={ styles.authors }>{ categories }</p>
+              <img src={coverImage} alt="cover" className={styles.image} loading="lazy" />
+              <p className={styles.title} data-full-title={title}>{title}</p>
+              <p className={styles.authors}>{authors}</p>
+              <p className={styles.authors}>{categories}</p>
             </div>
           )
-        }) }
+        })}
       </div>
-      { books?.length < totalItems && <button onClick={ loadMoreBooks }>Load More</button> }
+      {books?.length < totalItems && <button onClick={loadMoreBooks}>Load More</button>}
     </>
   )
 }

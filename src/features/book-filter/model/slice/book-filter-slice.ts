@@ -5,6 +5,7 @@ const initialState: BookFilterSchema = {
   filter: ''
 }
 
+debugger
 export const bookFilterSlice = createSlice({
   name: 'bookFilter',
   initialState,

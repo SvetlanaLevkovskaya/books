@@ -7,6 +7,7 @@ import { bookFilterActions } from 'features/book-filter/model/slice/book-filter-
 import { useNavigate } from 'react-router-dom'
 
 export const BookFilter = () => {
+  debugger
   const dispatch: AppDispatch = useDispatch()
   const navigate = useNavigate()
   const [filter, setFilter] = useState('')

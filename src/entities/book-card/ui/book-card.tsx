@@ -14,8 +14,6 @@ export const BookCard = () => {
   const dispatch: AppDispatch = useDispatch()
   const { book, error, isLoading } = useSelector(getBook)
 
-  console.log('book', book)
-
   useEffect(() => {
     dispatch(fetchBook(id))
   }, [dispatch, id])
